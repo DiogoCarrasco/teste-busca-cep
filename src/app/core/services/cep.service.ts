@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import {catchError, distinctUntilChanged, shareReplay } from 'rxjs/operators';
 import { Endereco, EnderecoItem } from '../models/endereco.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class CepService {
   buscarCep(cep: string): Observable<Endereco> {
     const cepLimpo = cep.replace(/\D/g, '');
     
-    return this.http.get<Endereco>(`https://viacep.com.br/ws/${cepLimpo}/json/`).pipe(
+    return this.http.get<Endereco>(`${environment.baseUrlCep}${cepLimpo}/json/`).pipe(
       catchError(error => {
         console.error('Erro ao buscar CEP:', error);
         return of(null);
