@@ -1,1 +1,146 @@
-/* You can add global styles to this file, and also import other style files */
+/* Bootstrap */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+/* Angular Material Theme */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* Material Icons */
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+* {
+  box-sizing: border-box;
+}
+
+/* Design Tokens - Variáveis CSS */
+:root {
+  /* Cores principais */
+  --primary: #670000;
+  --primary-hover: rgba(220, 53, 69, 0.1);
+  --white: #ffffff;
+  --gray-light: #f5f5f5;
+  --gray-medium: #e0e0e0;
+  --gray-dark: #757575;
+  --black: #212121;
+
+  /* Cores dos botões */
+  --button-bg: #d7dbdd;
+  --button-bg-hover: #c8ccce;
+  --button-text: #333333;
+
+  /* Tipografia */
+  --font-family: "Roboto", "Helvetica Neue", sans-serif;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+
+  /* Espaçamentos */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Bordas */
+  --border-radius: 8px;
+
+  /* Sombras */
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Classes Globais */
+
+.fs-xs {
+  font-size: 1rem;
+}
+
+.fs-sm {
+  font-size: 1.5rem;
+}
+
+.fs-md {
+  font-size: 2rem;
+}
+
+.fs-lg {
+  font-size: 3rem;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--black);
+  background-color: var(--gray-light);
+}
+
+/* Estilos globais para botões */
+button,
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 500;
+  box-shadow: var(--shadow);
+}
+
+button:hover,
+.btn:hover {
+  background-color: var(--button-bg-hover);
+}
+
+/* Utilitários */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  margin-top: 4rem;
+}
+
+.mat-snack-bar-container {
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.5rem var(--shadow);
+  font-weight: 500;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  color: var(--black);
+  background-color: var(--gray-light);
+  border-left: 0.5rem solid transparent;
+  .mat-button,
+  .mat-icon-button,
+  .mat-stroked-button {
+    color: var(--black);
+    background-color: var(--button-bg);
+  }
+}
+
+.snackbar-success {
+  border-left-color: #4caf50;
+}
+
+.snackbar-error {
+  border-left-color: #f44336;
+}
+
+.snackbar-info {
+  border-left-color: #2196f3;
+}
+
+.snackbar-warning {
+  border-left-color: #ff9800;
+}

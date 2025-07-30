@@ -1,0 +1,11 @@
+button[mat-raised-button]:disabled {
+  background-color: var(--gray-medium);
+  color: var(--gray-dark);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+button[mat-raised-button] {
+  height: 4.0rem;
+}
+

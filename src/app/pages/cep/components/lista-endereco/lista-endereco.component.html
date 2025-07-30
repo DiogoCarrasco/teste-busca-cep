@@ -1,3 +1,97 @@
-<p>
-  lista-endereco works!
-</p>
+<div class="p-3 p-md-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-body p-3 p-md-4">
+          <div class="d-flex justify-content-between align-items-center mb-3 mb-md-4 flex-wrap">
+            <h2 class="h5 h4-md mb-0 text-dark font-weight-medium">Lista de Endereços Pesquisados</h2>
+          </div>
+
+          <div class="table-responsive">
+            <table mat-table [dataSource]="paginatedEnderecos$ | async" class="mat-elevation-z1 w-100">
+             
+              <ng-container matColumnDef="cep">
+                <th mat-header-cell *matHeaderCellDef class="fs-xs">CEP</th>
+                <td mat-cell *matCellDef="let endereco">{{ endereco.cep }}</td>
+              </ng-container>
+              <ng-container matColumnDef="endereco">
+                <th mat-header-cell *matHeaderCellDef class="fs-xs">Endereço</th>
+                <td mat-cell *matCellDef="let endereco">
+                  <div class="d-flex flex-column">
+                    <span class="font-weight-medium text-dark">{{ endereco.endereco }}</span>
+                    <small class="text-muted font-italic d-none d-md-block" *ngIf="endereco.enderecoCompleto">
+                      {{ endereco.enderecoCompleto.bairro }}, {{ endereco.enderecoCompleto.localidade }} - {{ endereco.enderecoCompleto.uf }}
+                    </small>
+                  </div>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="data">
+                <th mat-header-cell *matHeaderCellDef class="fs-xs">Data</th>
+                <td mat-cell *matCellDef="let endereco">{{ endereco.data }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="acoes">
+                <th mat-header-cell *matHeaderCellDef class="fs-xs">Ações</th>
+                <td mat-cell *matCellDef="let endereco">
+                  <button class="btn btn-link text-danger p-1 d-flex justify-content-center align-items-center text-decoration-none transition-all" (click)="onDelete(endereco.id)" title="Excluir endereço">
+                    <i class="material-icons fs-sm">delete</i>
+                  </button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <div class="text-center py-4 py-md-5" *ngIf="(enderecos.length === 0)">
+              <i class="material-icons text-muted" >search</i>
+              <p class="h6 h5-md text-muted mt-3 mb-2">Nenhum endereço encontrado</p>
+              <small class="text-muted">Realize uma busca para ver os resultados aqui</small>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-3 mt-md-4 pt-3" *ngIf="(enderecos.length > 0)">
+            <div class="text-muted small font-weight-medium mb-2 mb-md-0">
+              Mostrando {{ (paginationInfo$ | async)?.start }} a {{ (paginationInfo$ | async)?.end }} de {{ (paginationInfo$ | async)?.total }} endereços
+            </div>
+            <nav aria-label="Navegação de páginas">
+              <ul class="pagination mb-0 d-flex align-items-center">
+                <li class="page-item" [class.disabled]="(currentPage$ | async) === 1">
+                  <button class="page-link border-0 rounded shadow-sm d-flex align-items-center justify-content-center fw-medium px-3 py-2 transition-all pagination-btn bg-white text-primary-custom" 
+                          [disabled]="(currentPage$ | async) === 1"
+                          (click)="navigatePage(DirectionENUM.PREV)"
+                          title="Página anterior">
+                    ‹
+                  </button>
+                </li>
+                <li class="page-item" *ngFor="let page of (pageNumbers$ | async)" [class.active]="page === (currentPage$ | async)">
+                  <button class="page-link border-0 rounded shadow-sm d-flex align-items-center justify-content-center fw-medium px-3 py-2 transition-all pagination-btn" 
+                          [ngClass]="{
+                            'bg-primary-custom text-white': page === (currentPage$ | async),
+                            'bg-white text-primary-custom': page !== (currentPage$ | async)
+                          }"
+                          (click)="goToPage(page)">
+                    {{ page }}
+                  </button>
+                </li>
+                <li class="page-item" [class.disabled]="(currentPage$ | async) === (totalPages$ | async)">
+                  <button class="page-link border-0 rounded shadow-sm d-flex align-items-center justify-content-center fw-medium px-3 py-2 transition-all pagination-btn bg-white text-primary-custom" 
+                          [disabled]="(currentPage$ | async) === (totalPages$ | async)"
+                          (click)="navigatePage(DirectionENUM.NEXT)"
+                          title="Próxima página">
+                    ›
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="text-right mt-3" *ngIf="enderecos.length > 0">
+            <small class="text-muted font-italic">Total de endereços: {{ enderecos.length }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

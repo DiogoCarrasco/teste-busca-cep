@@ -1,0 +1,29 @@
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.col-lg-8 {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+h1 {
+  line-height: 1.2;
+}
+
+.welcome-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--gray-dark);
+  line-height: 1.6;
+}
+
+.text-primary-custom {
+  color: var(--primary);
+}

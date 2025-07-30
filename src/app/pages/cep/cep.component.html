@@ -1,3 +1,12 @@
-<p>
-  cep works!
-</p>
+<div class="container d-flex align-items-start justify-content-center">
+  <div class="w-100 cep-content">
+    <div class="d-flex flex-column">
+      <app-busca-cep [enderecos]="enderecos$ | async" (searchEndereco)="onSearchEndereco($event)"></app-busca-cep>
+      <app-lista-endereco  *ngIf="enderecos$ | async as enderecos"
+        [enderecos]="enderecos"
+        (deleteEndereco)="onDeleteEndereco($event)">
+      </app-lista-endereco>
+    </div>
+  </div>
+</div>
+

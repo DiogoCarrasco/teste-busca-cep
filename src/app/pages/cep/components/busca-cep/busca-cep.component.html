@@ -1,3 +1,36 @@
-<p>
-  busca-cep works!
-</p>
+<form [formGroup]="cepForm">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <h2 class="text-center mb-4">Buscar Endereços</h2>
+    </div>
+  </div>
+  
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+      
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>CEP</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="cep"
+          placeholder="Ex. 00000-000"
+          (input)="formatarCep($event)"
+        />
+        <mat-error *ngIf="cepFormControl.hasError('pattern')">CEP Inválido</mat-error>
+        <mat-error *ngIf="cepFormControl.hasError('required')">CEP é <strong>obrigatório</strong></mat-error>
+      </mat-form-field>
+    </div>
+    
+    <div class="col-12 col-sm-4 col-md-3 col-lg-2">
+      <button
+        mat-raised-button
+        class="btn btn-primary w-100"
+        (click)="buscarEndereco(cepFormControl.value)"
+        [disabled]="cepForm.invalid"
+      >
+        Buscar
+      </button>
+    </div>
+  </div>
+</form>

@@ -1,3 +1,37 @@
-<p>
-  header works!
-</p>
+<header class="app-header">
+  <div class="d-flex justify-content-around align-items-center">
+    <div>
+      <img src="assets/images/sccon-logo.png" alt="Logo" class="logo-image">
+    </div>
+
+    <nav>
+      <div class="nav-buttons">
+        <button class="btn" routerLink="/" routerLinkActive="active">
+          <mat-icon>home</mat-icon>
+          <span class="button-text">Home</span>
+        </button>
+        
+        <div class="dropdown-wrapper">
+          <button class="btn dropdown-trigger" 
+                  (click)="toggleEnderecosMenu()" 
+                  [class.active]="enderecosMenuOpen">
+            <mat-icon>location_on</mat-icon>
+            <span class="button-text">Endereços</span>
+            <mat-icon class="dropdown-arrow" [class.rotated]="enderecosMenuOpen">
+              arrow_drop_down
+            </mat-icon>
+          </button>
+          
+          <div class="dropdown-menu" *ngIf="enderecosMenuOpen">
+            <a class="dropdown-item" 
+               routerLink="/cep" 
+               routerLinkActive="active" 
+               (click)="toggleEnderecosMenu()">
+              <span>Buscar Endereços</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
